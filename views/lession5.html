@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--v-if是一个指令，需要将它添加到一个元素上-->
+        <h1 v-if="ok">Yes</h1>
+        <h1 v-else>No</h1>
+
+
+        <!--template可以作为包装元素-->
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+        <template v-else>
+            <h1>Title1</h1>
+            <p>Paragraph 11</p>
+            <p>Paragraph 22</p>
+        </template>
+
+        <!--v-show切换元素的display状态-->
+        <div v-show="ok">1111</div>
+
+        <!--v-else 必须跟在v-if或者v-show后面否则不能被识别-->
+        <div v-else>111</div>
+        <div>
+            占位
+        </div>
+
+
+        <!--
+            v-if :只有当条件为真时才进行编译（编译会被保存起来）
+            v-show:元素始终被编译并保存，只是简单基于css切换
+            v-if有更高的切换消耗，v-show有更高的初始化消耗
+        -->
+
+
+    </div>
+
+    <script>
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                ok:true
+            }
+
+
+        })
+    </script>
+</body>
+</html>

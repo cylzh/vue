@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <!--v-for如果是一个数组-->
+        <div v-for="todo in todos">
+            <div>{{$index}}.{{message}}:{{todo.text}}</div>
+        </div>
+
+        <!--v-for如果是一个对象，
+        可以为对象的键指定一个别名
+            (index,item)
+        -->
+        <div v-for="(index,item) in person">
+            <div>
+               {{index}} {{item}}
+            </div>
+        </div>
+
+        <ul>
+            <template v-for="item in todos">
+                <li>{{ item.text }}</li>
+                <li class="divider">11</li>
+            </template>
+        </ul>
+
+        <!--
+            v-for 一个对象是，可以通过$key来获取到属性名
+            $key:
+
+        -->
+        <ul>
+            <li  v-for="value in person">
+                {{$key}}:{{value}}
+            </li>
+        </ul>
+    </div>
+
+
+    <script>
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                message:"hello",
+                todos :[
+
+                    {text:"111"},
+                    {text:"222"},
+                    {text:"333"}
+                ],
+                person:{
+                    name:"1122",
+                    age:12,
+                    sex:"男"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

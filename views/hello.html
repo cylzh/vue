@@ -2,22 +2,121 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>概述</title>
     <script src="../lib/vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        {{ message }}
-    </div>
+<!--数据渲染-->
+<div id="app">
+    {{ message }}
+    <input v-model="message">
+</div>
+
+<!--双向绑定-->
+<!--
+    v-model
+    {{}}
+-->
+<div id="app1">
+    <img title="{{name}}}" alt="{{name}}" v-attr="src: url">
+    <input v-model="name">
+    <input v-model="url">
+</div>
+
+<!--渲染列表-->
+<!--
+    v-for
+-->
+<div id="app2">
+    <ul>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ul>
+</div>
+
+<!--事件绑定v-on:click-->
+<div id="app3">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">reverseMessage</button>
+</div>
+
+<!--综合-->
+<div id="app4">
+    <input v-on:keyup.enter="addTodo" v-model="newTodo">
+
+    <ul v-for="todo in todos">
+        <li>
+            {{todo.text}}
+            <button v-on:click="remove($index)"></button>
+        </li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    })
 
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue.js!'
+    new Vue({
+        el: "#app1",
+        data: {
+            name: "taobao",
+            url: "https://www.taobao.com/favicon.ico"
+        }
+    })
+
+    new Vue({
+        el: "#app2",
+        data: {
+            todos: [
+                {text: 'Learn JavaScript'},
+                {text: 'Learn Vue.js'},
+                {text: 'Build Something Awesome'}
+            ]
+        }
+    })
+
+
+    new Vue({
+        el: "#app3",
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split("").reverse().join("")
             }
-        })
-    </script>
+        }
+    })
+
+    new Vue({
+        el: "#app4",
+        data: {
+            todos: [
+                {text: 'Learn JavaScript'},
+                {text: 'Learn Vue.js'},
+                {text: 'Build Something Awesome'}
+            ],
+            newTodo:""
+        },
+        methods: {
+            addTodo: function () {
+                var text = this.newTodo.trim();
+                if (text) {
+                    this.todos.push({text:text});
+                    this.newTodo = "";
+                }
+            },
+            remove: function (index) {
+                this.todos.splice(index, 1)
+            }
+        }
+    })
+</script>
 </body>
 </html>
